@@ -125,6 +125,7 @@ namespace FitnessClub.Pages
                     temp.Margin = new Padding(0);
                     temp.Padding = new Padding(0);
 
+
                     offset += temp.Height;
                     lessonContainer.Controls.Add(temp);
                     lesson.Add(temp);
