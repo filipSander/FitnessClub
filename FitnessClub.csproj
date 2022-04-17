@@ -235,13 +235,9 @@
     </Content>
     <None Include="Resources\Wavy_Lst-10_Single-03.png" />
     <None Include="Resources\free-icon-subscription-1260241.png" />
-    <None Include="Resources\png-transparent-graphics-calendar-illustration-computer-icons-calendar-icon-calendar-logo-time1.png" />
-    <None Include="Resources\png-transparent-graphics-calendar-illustration-computer-icons-calendar-icon-calendar-logo-time.png" />
-    <None Include="Resources\1260109.png" />
     <None Include="Resources\219983.png" />
     <None Include="Resources\146031.png" />
     <None Include="Resources\BG-2.png" />
-    <None Include="Resources\bg.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
