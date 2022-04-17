@@ -53,7 +53,6 @@
             this.container.Name = "container";
             this.container.Size = new System.Drawing.Size(781, 471);
             this.container.TabIndex = 0;
-            this.container.Resize += new System.EventHandler(this.flowLayoutPanel1_Resize);
             // 
             // panel1
             // 

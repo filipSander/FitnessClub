@@ -1,13 +1,5 @@
 ﻿using FitnessClub.Assets;
 using FitnessClub.Pages;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FitnessClub.Forms
@@ -29,7 +21,6 @@ namespace FitnessClub.Forms
             new FormStyle(this);
             Text += $" ({userName})";
 
-
             sidebar.AddItem("Расписание"); // 0
             sidebar.AddItem("Абонименты"); // 1
             sidebar.AddItem("Занятия");    // 2
@@ -38,7 +29,7 @@ namespace FitnessClub.Forms
             sidebar.SelectedIndex = 3;
             sidebar.MenuItemsBg[sidebar.SelectedIndex].BackgroundImage = Properties.Resources.BG_2;
             sidebar.MenuItemsBg[sidebar.SelectedIndex].BackgroundImageLayout = ImageLayout.Zoom;
-            pageInit(new Index(), container);
+            pageInit(typeUser == 1 ? new Index(userName) : new Index(), container);
 
             for (int i = 0; i < sidebar.MenuItemsBg.Count; i++)
             {
@@ -61,7 +52,7 @@ namespace FitnessClub.Forms
             switch (sidebar.SelectedIndex)
             {
                 case 0:
-                    pageInit(new Schedule(), container);
+                    pageInit(/*typeUser == 1 ? new Schedule(userName) : */new Schedule(), container);
                     break;
                 case 1:
                     pageInit(new Sub(), container);
@@ -70,7 +61,7 @@ namespace FitnessClub.Forms
                     pageInit(new Lesson(), container);
                     break;
                 case 3:
-                    pageInit(new Index(), container);
+                    pageInit(typeUser == 1 ? new Index(userName) : new Index(), container);
                 break;                
             }
         }
