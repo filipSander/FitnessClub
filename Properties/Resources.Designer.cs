@@ -63,16 +63,6 @@ namespace FitnessClub.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _1260109 {
-            get {
-                object obj = ResourceManager.GetObject("1260109", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap _146031 {
             get {
                 object obj = ResourceManager.GetObject("146031", resourceCulture);
@@ -136,28 +126,6 @@ namespace FitnessClub.Properties {
         internal static System.Drawing.Bitmap ico {
             get {
                 object obj = ResourceManager.GetObject("ico", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap png_transparent_graphics_calendar_illustration_computer_icons_calendar_icon_calendar_logo_time {
-            get {
-                object obj = ResourceManager.GetObject("png-transparent-graphics-calendar-illustration-computer-icons-calendar-icon-calen" +
-                        "dar-logo-time", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap png_transparent_graphics_calendar_illustration_computer_icons_calendar_icon_calendar_logo_time1 {
-            get {
-                object obj = ResourceManager.GetObject("png-transparent-graphics-calendar-illustration-computer-icons-calendar-icon-calen" +
-                        "dar-logo-time1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
