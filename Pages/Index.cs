@@ -89,7 +89,7 @@ namespace FitnessClub.Pages
             return string.Empty;
         }
 
-            private string checkLessonName(int _lessID)
+        private string checkLessonName(int _lessID)
         {
             SqlOperation operation = new SqlOperation();
             SqlCommand command = new SqlCommand("Select [Name] from [Lesson] where [LessonID] = " + _lessID, operation.DBcontext.GetConnection());
@@ -98,8 +98,6 @@ namespace FitnessClub.Pages
                 return  table.Rows[0].Field<string>("Name");
             return string.Empty;
         }
-
-
 
         private void fillSubName(int _SubID)
         {
@@ -113,13 +111,6 @@ namespace FitnessClub.Pages
                     lblSub.Text += table.Rows[i].Field<string>("Name");
             }
         }
-
-
-
-
-
-
-
 
         private void act()
         {

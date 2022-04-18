@@ -39,6 +39,7 @@ namespace FitnessClub.Pages
             getSubID();
             getLessID();
             checkUserLesson();
+            container.Location = new Point(container.Location.X, container.Location.Y + 10);
         }
 
         private void checkUserLesson()
