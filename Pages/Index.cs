@@ -49,11 +49,8 @@ namespace FitnessClub.Pages
             DataTable table = operation.RequestTable(command);
             if (table.Rows.Count > 0)
             {
-                for(int i = 0; i < table.Rows.Count; i++)
-                {
-                    fillSubName(table.Rows[i].Field<int>("SubID"));
-                    fillInput(table.Rows[i].Field<int>("SubID"));
-                }
+                    fillSubName(table.Rows[0].Field<int>("SubID"));
+                    fillInput(table.Rows[0].Field<int>("SubID"));
             }
         }
 

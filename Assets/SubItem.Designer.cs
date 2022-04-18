@@ -101,7 +101,7 @@
             this.richLesson.Font = new System.Drawing.Font("Franklin Gothic Demi", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.richLesson.ForeColor = System.Drawing.Color.Tan;
             this.richLesson.Location = new System.Drawing.Point(12, 133);
-            this.richLesson.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.richLesson.Margin = new System.Windows.Forms.Padding(2);
             this.richLesson.Name = "richLesson";
             this.richLesson.ReadOnly = true;
             this.richLesson.Size = new System.Drawing.Size(153, 90);
@@ -130,6 +130,7 @@
             this.Delete.TabIndex = 17;
             this.Delete.Text = "-";
             this.Delete.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Delete.TabIndexChanged += new System.EventHandler(this.DeleteTabIndexChanged);
             // 
             // SubItem
             // 

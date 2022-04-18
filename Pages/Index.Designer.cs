@@ -269,9 +269,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(12, 36);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(184, 17);
+            this.label7.Size = new System.Drawing.Size(167, 17);
             this.label7.TabIndex = 21;
-            this.label7.Text = "Ваши активные абонименты: ";
+            this.label7.Text = "Ваш активный абонимент: ";
             // 
             // lblNameUser
             // 

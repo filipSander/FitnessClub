@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace FitnessClub.Assets
@@ -21,6 +22,8 @@ namespace FitnessClub.Assets
             set { _dateEx = value; lblDateEx.Text = value; }
         }
 
+
+
         [Category("AMy prop")]
         public string CaPrice
         {
@@ -38,6 +41,24 @@ namespace FitnessClub.Assets
         public SubItem()
         {
             InitializeComponent();
+            changeStatus();
         }
+
+
+        private void changeStatus()
+        {
+            if (Delete.TabIndex == 0)
+            {
+                Delete.Text = "+";
+                Delete.BackColor = Color.Green;
+            }
+            else
+            {
+                Delete.Text = "-";
+                Delete.BackColor = Color.Maroon;
+            }
+        }
+        private void DeleteTabIndexChanged(object sender, System.EventArgs e)
+            => changeStatus();
     }
 }

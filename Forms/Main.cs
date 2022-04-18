@@ -52,7 +52,7 @@ namespace FitnessClub.Forms
                     pageInit(typeUser == 1 ? new Schedule(userName) : new Schedule(), container);
                     break;
                 case 1:
-                    pageInit(new Sub(), container);
+                    pageInit(typeUser == 1 ? new Sub(userName) : new Sub(), container);
                     break;
                 case 2:
                     pageInit(typeUser == 1 ? new Lesson(userName) :new Lesson(), container);

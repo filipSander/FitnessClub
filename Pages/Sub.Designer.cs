@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.adminContent = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.lblLessons = new System.Windows.Forms.Label();
             this.lessonContainer = new System.Windows.Forms.FlowLayoutPanel();
@@ -43,7 +43,7 @@
             this.tbName = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.container = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupBox1.SuspendLayout();
+            this.adminContent.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -57,36 +57,36 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Абонименты";
             // 
-            // groupBox1
+            // adminContent
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.lblLessons);
-            this.groupBox1.Controls.Add(this.lessonContainer);
-            this.groupBox1.Controls.Add(this.lblDateEx);
-            this.groupBox1.Controls.Add(this.tbDateEx);
-            this.groupBox1.Controls.Add(this.lblDesc);
-            this.groupBox1.Controls.Add(this.rcDesc);
-            this.groupBox1.Controls.Add(this.lblPrice);
-            this.groupBox1.Controls.Add(this.tbPrice);
-            this.groupBox1.Controls.Add(this.lblName);
-            this.groupBox1.Controls.Add(this.tbName);
-            this.groupBox1.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox1.ForeColor = System.Drawing.Color.Snow;
-            this.groupBox1.Location = new System.Drawing.Point(19, 316);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(753, 200);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Добавить";
+            this.adminContent.Controls.Add(this.button1);
+            this.adminContent.Controls.Add(this.lblLessons);
+            this.adminContent.Controls.Add(this.lessonContainer);
+            this.adminContent.Controls.Add(this.lblDateEx);
+            this.adminContent.Controls.Add(this.tbDateEx);
+            this.adminContent.Controls.Add(this.lblDesc);
+            this.adminContent.Controls.Add(this.rcDesc);
+            this.adminContent.Controls.Add(this.lblPrice);
+            this.adminContent.Controls.Add(this.tbPrice);
+            this.adminContent.Controls.Add(this.lblName);
+            this.adminContent.Controls.Add(this.tbName);
+            this.adminContent.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.adminContent.ForeColor = System.Drawing.Color.Snow;
+            this.adminContent.Location = new System.Drawing.Point(19, 316);
+            this.adminContent.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.adminContent.Name = "adminContent";
+            this.adminContent.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.adminContent.Size = new System.Drawing.Size(753, 200);
+            this.adminContent.TabIndex = 2;
+            this.adminContent.TabStop = false;
+            this.adminContent.Text = "Добавить";
             // 
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(652, 154);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(85, 32);
             this.button1.TabIndex = 13;
@@ -111,7 +111,7 @@
             this.lessonContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lessonContainer.Font = new System.Drawing.Font("Franklin Gothic Demi", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lessonContainer.Location = new System.Drawing.Point(461, 64);
-            this.lessonContainer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lessonContainer.Margin = new System.Windows.Forms.Padding(2);
             this.lessonContainer.Name = "lessonContainer";
             this.lessonContainer.Size = new System.Drawing.Size(175, 112);
             this.lessonContainer.TabIndex = 11;
@@ -228,7 +228,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(44)))), ((int)(((byte)(52)))));
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.adminContent);
             this.Controls.Add(this.container);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label1);
@@ -237,8 +237,8 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Sub";
             this.Size = new System.Drawing.Size(797, 531);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.adminContent.ResumeLayout(false);
+            this.adminContent.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,7 +247,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox adminContent;
         private System.Windows.Forms.Label lblDateEx;
         private System.Windows.Forms.TextBox tbDateEx;
         private System.Windows.Forms.Label lblPrice;

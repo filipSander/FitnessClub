@@ -17,6 +17,50 @@ namespace FitnessClub.Pages
             InitializeComponent();
             act();
         }
+        #region -- client part -- 
+
+        public Sub(string userName)
+        {
+            InitializeComponent();
+            nameUser = userName;
+            actUser();
+            
+        }
+
+        string nameUser= string.Empty;
+        int couterpatyID;
+        List<int> subID;
+        private void actUser()
+        {
+            adminContent.Visible = false;
+            couterpatyID = getcouterpatyID(nameUser);
+            subID = new List<int>();
+            getSubID();
+            checkSub();
+        }
+
+        private void getSubID()
+        {
+            SqlOperation operation = new SqlOperation();
+            SqlCommand command = new SqlCommand("Select [SubID] from [CaSub] where [CounterpartyID] = " + couterpatyID, operation.DBcontext.GetConnection());
+            DataTable table = operation.RequestTable(command);
+            if (table.Rows.Count > 0)
+                for (int i = 0; i < table.Rows.Count; i++)
+                    subID.Add(table.Rows[i].Field<int>("SubID"));
+        }
+
+        private int getcouterpatyID(string _login)
+        {
+            SqlOperation operation = new SqlOperation();
+            SqlCommand command = new SqlCommand("Select [CounterpartyID] from [User] where [Login] = @lg", operation.DBcontext.GetConnection());
+            command.Parameters.Add("lg", SqlDbType.NVarChar).Value = _login;
+            DataTable table = operation.RequestTable(command);
+            if (table.Rows.Count > 0)
+                return table.Rows[0].Field<int>("CounterpartyID");
+            return 0;
+        }
+
+        #endregion
 
         List<CheckBox> lesson;
         private void act()
@@ -153,13 +197,75 @@ namespace FitnessClub.Pages
 
 
                     temp.Location = new Point(0, offset);
-                    temp.Delete.Tag = table.Rows[i].Field<int>("SubID");
-                    temp.Delete.Click += DeleteSub; 
+                    temp.Delete.TabIndex = 2;
+                    if(nameUser == string.Empty)
+                    {
+                        temp.Delete.Tag = table.Rows[i].Field<int>("SubID");
+                        temp.Delete.Click += DeleteSub;
+                    }
+                    else
+                    {
+                        temp.Delete.TabIndex = 0;
+                        temp.Delete.Tag = table.Rows[i].Field<int>("SubID");
+                        if(subID.Contains(table.Rows[i].Field<int>("SubID")))
+                            temp.Delete.TabIndex = 1;
+
+                        temp.Delete.Click += subOperationClick;
+                    }
+
 
                     offset += temp.Width;
                     container.Controls.Add(temp);
                 }
             }
+        }
+
+        private bool checkSubOwned()
+        {
+            SqlOperation operation = new SqlOperation();
+            SqlCommand command = new SqlCommand("select * from [CaSub] where [CounterpartyID] = " + couterpatyID, operation.DBcontext.GetConnection());
+            DataTable table = operation.RequestTable(command);
+            if (table.Rows.Count > 0)
+                return true;
+            return false;
+        }
+
+        private void subOperationClick(object sender, EventArgs e)
+        {
+            SqlOperation operation = new SqlOperation();
+            if ((sender as Label).TabIndex == 1)
+            {
+                SqlCommand command = new SqlCommand("delete  from [CaSub]  where [SubID] = @SubID and [CounterpartyID] = " + couterpatyID, operation.DBcontext.GetConnection());
+                command.Parameters.Add("SubID", SqlDbType.Int).Value = (int)(sender as Label).Tag;
+                if (operation.Request(command))
+                    MessageBox.Show("Вы продали абонимент");
+                else
+                {
+                    new Error("Что-то пошло не так").Show();
+                    return;
+                }
+                (sender as Label).TabIndex = 0;
+            }
+            else
+            {
+                if(checkSubOwned())
+                {
+                    MessageBox.Show("У вас уже имеется приобретенный абонимент");
+                    return;
+                }
+                SqlCommand command = new SqlCommand("insert  into [CaSub] ([CounterpartyID], [SubID])" + 
+                    "Values (@caID, @subID);", operation.DBcontext.GetConnection());
+                command.Parameters.Add("subID", SqlDbType.Int).Value = (int)(sender as Label).Tag;
+                command.Parameters.Add("caID", SqlDbType.Int).Value = couterpatyID;
+                if (operation.Request(command))
+                    MessageBox.Show("Вы купили абонимент");
+                else
+                {
+                    new Error("Что-то пошло не так").Show();
+                    return;
+                }
+                (sender as Label).TabIndex = 1;
+            } 
         }
 
         private string checkCaLesson(int _id)
