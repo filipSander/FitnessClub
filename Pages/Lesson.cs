@@ -3,13 +3,9 @@ using FitnessClub.Data;
 using FitnessClub.Forms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FitnessClub.Pages
@@ -21,6 +17,98 @@ namespace FitnessClub.Pages
             InitializeComponent();
             act();
         }
+        #region -- Client part --
+        string nameUser;
+        public Lesson( string userName)
+        {
+            InitializeComponent();
+            nameUser = userName;
+            actUser();
+        }
+        
+        List<int> subID;
+        List<int> lessID;
+        int couterpatyID;
+        private void actUser()
+        {
+            aminContent.Visible = false;
+            couterpatyID = getcouterpatyID(nameUser);
+            lessID = new List<int>();
+            subID = new List<int>();
+
+            getSubID();
+            getLessID();
+            checkUserLesson();
+        }
+
+        private void checkUserLesson()
+        {
+            SqlOperation operation = new SqlOperation();
+            int offset = 0;
+            for (int i = 0; i < lessID.Count; i++)
+            {
+                SqlCommand command = new SqlCommand("select * from [Lesson] where [LessonID] = " + lessID[i], operation.DBcontext.GetConnection());
+                DataTable table = operation.RequestTable(command);
+                if(table.Rows.Count > 0)
+                {
+                    LessonItem temp = new LessonItem();
+                    temp.LesStatus = table.Rows[0].Field<int>("Status") == 0 ? "Не активна" : "Активна";
+                    temp.LesName = table.Rows[0].Field<string>("Name");
+                    temp.LesTime = table.Rows[0].Field<string>("TimeSpending");
+                    string day = "Не установлен";
+                    switch (table.Rows[0].Field<int>("DayWeek"))
+                    {
+                        case 1: day = "ПТ"; break;
+                        case 2: day = "ВТ"; break;
+                        case 3: day = "СР"; break;
+                        case 4: day = "ЧТ"; break;
+                        case 5: day = "ПТ"; break;
+                        case 6: day = "СБ"; break;
+                        case 7: day = "ВС"; break;
+                    }
+                    temp.LesDay = day;
+                    temp.LesMaster = getCaName(table.Rows[0].Field<int>("CounterpartyID"));
+                    temp.Location = new Point(0, offset);
+                    temp.Delete.Visible = false;
+
+                    offset += temp.Width;
+                    container.Controls.Add(temp);
+                }
+            }
+        }
+
+        private void getLessID()
+        {
+            SqlOperation operation = new SqlOperation();
+            for(int i = 0; i < subID.Count; i++)
+            {
+                SqlCommand command = new SqlCommand("Select [LessonID] from [SubLesson] where [SubID] = " + subID[i], operation.DBcontext.GetConnection());
+                DataTable table = operation.RequestTable(command);
+                if (table.Rows.Count > 0)
+                    for (int j = 0; j < table.Rows.Count; j++)
+                        lessID.Add(table.Rows[j].Field<int>("LessonID"));
+            }
+        }
+        private void getSubID()
+        {
+            SqlOperation operation = new SqlOperation();
+            SqlCommand command = new SqlCommand("Select [SubID] from [CaSub] where [CounterpartyID] = " + couterpatyID, operation.DBcontext.GetConnection());
+            DataTable table = operation.RequestTable(command);
+            if (table.Rows.Count > 0)
+                for(int i = 0; i < table.Rows.Count; i++)
+                    subID.Add(table.Rows[i].Field<int>("SubID"));
+        }
+        private int getcouterpatyID(string _login)
+        {
+            SqlOperation operation = new SqlOperation();
+            SqlCommand command = new SqlCommand("Select [CounterpartyID] from [User] where [Login] = @lg", operation.DBcontext.GetConnection());
+            command.Parameters.Add("lg", SqlDbType.NVarChar).Value = _login;
+            DataTable table = operation.RequestTable(command);
+            if (table.Rows.Count > 0)
+                return table.Rows[0].Field<int>("CounterpartyID");
+            return 0;
+        }
+        #endregion
 
         private List<Label> days;
         private void act()

@@ -28,7 +28,6 @@ namespace FitnessClub.Forms
 
             sidebar.SelectedIndex = 3;
             sidebar.MenuItemsBg[sidebar.SelectedIndex].BackgroundImage = Properties.Resources.BG_2;
-            sidebar.MenuItemsBg[sidebar.SelectedIndex].BackgroundImageLayout = ImageLayout.Zoom;
             pageInit(typeUser == 1 ? new Index(userName) : new Index(), container);
 
             for (int i = 0; i < sidebar.MenuItemsBg.Count; i++)
@@ -45,20 +44,18 @@ namespace FitnessClub.Forms
                 p.BackgroundImage = null;
 
             sidebar.MenuItemsBg[sidebar.SelectedIndex].BackgroundImage = Properties.Resources.BG_2;
-            sidebar.MenuItemsBg[sidebar.SelectedIndex].BackgroundImageLayout = ImageLayout.Zoom;
-            
 
 
             switch (sidebar.SelectedIndex)
             {
                 case 0:
-                    pageInit(/*typeUser == 1 ? new Schedule(userName) : */new Schedule(), container);
+                    pageInit(typeUser == 1 ? new Schedule(userName) : new Schedule(), container);
                     break;
                 case 1:
                     pageInit(new Sub(), container);
                     break;
                 case 2:
-                    pageInit(new Lesson(), container);
+                    pageInit(typeUser == 1 ? new Lesson(userName) :new Lesson(), container);
                     break;
                 case 3:
                     pageInit(typeUser == 1 ? new Index(userName) : new Index(), container);

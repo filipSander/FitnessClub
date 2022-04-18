@@ -22,6 +22,7 @@ namespace FitnessClub.Forms
             loginCtl.Input.TextChanged += InputTextChanged;
             passCtl.Input.TextChanged += InputTextChanged;
             apply.Butt.Click += applyClick;
+
             WindowState = FormWindowState.Minimized;
             new Main("User", 1).Show();
         }

@@ -1,13 +1,6 @@
 ﻿using FitnessClub.Data;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FitnessClub.Pages
@@ -71,11 +64,42 @@ namespace FitnessClub.Pages
             DataTable table = operation.RequestTable(command);
             if(table.Rows.Count > 0)
             {
-                for(int i = 0; i < table.Rows.Count; i++)
+                input.Text = "Переподователь \t\t\t Занятие\n\n";
+                for (int i = 0; i < table.Rows.Count; i++)
                 {
-                    
+                    input.Text += checkLessonMaster(table.Rows[0].Field<int>("LessonID")) + "\t\t\t " +  checkLessonName(table.Rows[0].Field<int>("LessonID")) + "\n";
                 }
             }
+        }
+
+        private string checkLessonMaster(int _lessID)
+        {
+            SqlOperation operation = new SqlOperation();
+            SqlCommand command = new SqlCommand("Select [CounterpartyID] from [Lesson] where [LessonID] = " + _lessID, operation.DBcontext.GetConnection());
+            DataTable table = operation.RequestTable(command);
+            if (table.Rows.Count > 0)
+                return checkMasterName(table.Rows[0].Field<int>("CounterpartyID"));
+            return string.Empty;
+        }
+
+        private string checkMasterName(int _CaID)
+        {
+            SqlOperation operation = new SqlOperation();
+            SqlCommand command = new SqlCommand("Select [FIO] from [Counterparty] where [CounterpartyID] = " + _CaID, operation.DBcontext.GetConnection());
+            DataTable table = operation.RequestTable(command);
+            if (table.Rows.Count > 0)
+                return table.Rows[0].Field<string>("FIO");
+            return string.Empty;
+        }
+
+            private string checkLessonName(int _lessID)
+        {
+            SqlOperation operation = new SqlOperation();
+            SqlCommand command = new SqlCommand("Select [Name] from [Lesson] where [LessonID] = " + _lessID, operation.DBcontext.GetConnection());
+            DataTable table = operation.RequestTable(command);
+            if (table.Rows.Count > 0)
+                return  table.Rows[0].Field<string>("Name");
+            return string.Empty;
         }
 
 
