@@ -36,7 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.Delete = new System.Windows.Forms.Label();
+            this.Butt = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblName
@@ -130,15 +130,15 @@
             // 
             // Delete
             // 
-            this.Delete.BackColor = System.Drawing.Color.Maroon;
-            this.Delete.Font = new System.Drawing.Font("Franklin Gothic Demi", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Delete.Location = new System.Drawing.Point(160, 4);
-            this.Delete.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Delete.Name = "Delete";
-            this.Delete.Size = new System.Drawing.Size(20, 20);
-            this.Delete.TabIndex = 8;
-            this.Delete.Text = "-";
-            this.Delete.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Butt.BackColor = System.Drawing.Color.Maroon;
+            this.Butt.Font = new System.Drawing.Font("Franklin Gothic Demi", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Butt.Location = new System.Drawing.Point(160, 4);
+            this.Butt.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Butt.Name = "Delete";
+            this.Butt.Size = new System.Drawing.Size(20, 20);
+            this.Butt.TabIndex = 8;
+            this.Butt.Text = "-";
+            this.Butt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LessonItem
             // 
@@ -146,7 +146,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(50)))));
-            this.Controls.Add(this.Delete);
+            this.Controls.Add(this.Butt);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
@@ -175,6 +175,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        public System.Windows.Forms.Label Delete;
+        public System.Windows.Forms.Label Butt;
     }
 }

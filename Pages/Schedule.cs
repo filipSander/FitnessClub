@@ -1,13 +1,7 @@
 ﻿using FitnessClub.Data;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FitnessClub.Pages
@@ -104,7 +98,13 @@ namespace FitnessClub.Pages
             if (table.Rows.Count > 0)
             {
                 for (int i = 0; i < table.Rows.Count; i++)
-                    scheduleView1.AddLesson(table.Rows[i].Field<string>("Name"), table.Rows[i].Field<string>("TimeSpending"), table.Rows[i].Field<int>("DayWeek"));
+                    scheduleView1.AddLesson(
+                        table.Rows[i].Field<string>("Name"), 
+                        table.Rows[i].Field<string>("TimeSpending"), 
+                        table.Rows[i].Field<int>("DayWeek"),
+                        table.Rows[i].Field<int>("LessonID"), 
+                        table.Rows[i].Field<int>("Status")
+                    );
             }
         }
     }

@@ -134,7 +134,7 @@
             this.day7.Size = new System.Drawing.Size(24, 17);
             this.day7.TabIndex = 21;
             this.day7.Text = "ВС";
-            this.day7.Click += new System.EventHandler(this.day1_Click);
+            this.day7.Click += new System.EventHandler(this.dayLblClick);
             // 
             // day6
             // 
@@ -146,7 +146,7 @@
             this.day6.Size = new System.Drawing.Size(23, 17);
             this.day6.TabIndex = 20;
             this.day6.Text = "СУ";
-            this.day6.Click += new System.EventHandler(this.day1_Click);
+            this.day6.Click += new System.EventHandler(this.dayLblClick);
             // 
             // day5
             // 
@@ -158,7 +158,7 @@
             this.day5.Size = new System.Drawing.Size(22, 17);
             this.day5.TabIndex = 19;
             this.day5.Text = "ПТ";
-            this.day5.Click += new System.EventHandler(this.day1_Click);
+            this.day5.Click += new System.EventHandler(this.dayLblClick);
             // 
             // day4
             // 
@@ -170,7 +170,7 @@
             this.day4.Size = new System.Drawing.Size(22, 17);
             this.day4.TabIndex = 18;
             this.day4.Text = "ЧТ";
-            this.day4.Click += new System.EventHandler(this.day1_Click);
+            this.day4.Click += new System.EventHandler(this.dayLblClick);
             // 
             // day3
             // 
@@ -182,7 +182,7 @@
             this.day3.Size = new System.Drawing.Size(24, 17);
             this.day3.TabIndex = 17;
             this.day3.Text = "СР";
-            this.day3.Click += new System.EventHandler(this.day1_Click);
+            this.day3.Click += new System.EventHandler(this.dayLblClick);
             // 
             // day2
             // 
@@ -194,7 +194,7 @@
             this.day2.Size = new System.Drawing.Size(22, 17);
             this.day2.TabIndex = 16;
             this.day2.Text = "ВТ";
-            this.day2.Click += new System.EventHandler(this.day1_Click);
+            this.day2.Click += new System.EventHandler(this.dayLblClick);
             // 
             // day1
             // 
@@ -206,7 +206,7 @@
             this.day1.Size = new System.Drawing.Size(24, 17);
             this.day1.TabIndex = 15;
             this.day1.Text = "ПН";
-            this.day1.Click += new System.EventHandler(this.day1_Click);
+            this.day1.Click += new System.EventHandler(this.dayLblClick);
             // 
             // dateTimePicker1
             // 

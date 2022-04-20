@@ -17,6 +17,7 @@ namespace FitnessClub.Pages
             InitializeComponent();
             act();
         }
+
         #region -- Client part --
         string nameUser;
         public Lesson( string userName)
@@ -70,7 +71,7 @@ namespace FitnessClub.Pages
                     temp.LesDay = day;
                     temp.LesMaster = getCaName(table.Rows[0].Field<int>("CounterpartyID"));
                     temp.Location = new Point(0, offset);
-                    temp.Delete.Visible = false;
+                    temp.Butt.Visible = false;
 
                     offset += temp.Width;
                     container.Controls.Add(temp);
@@ -147,8 +148,8 @@ namespace FitnessClub.Pages
                     temp.LesDay = day;
                     temp.LesMaster = getCaName(table.Rows[i].Field<int>("CounterpartyID"));
                     temp.Location = new Point(0, offset);
-                    temp.Delete.Tag = table.Rows[i].Field<int>("LessonID");
-                    temp.Delete.Click += DeleteClick;
+                    temp.Butt.Tag = table.Rows[i].Field<int>("LessonID");
+                    temp.Butt.Click += DeleteClick;
                     
                     offset += temp.Width;
                     container.Controls.Add(temp);
@@ -156,15 +157,39 @@ namespace FitnessClub.Pages
             }
         }
 
+        private bool checkDocOwned(int _id)
+        {
+            SqlOperation operation = new SqlOperation();
+            SqlCommand command = new SqlCommand("Select * from [SubLesson] where [LessonID] = @id;", operation.DBcontext.GetConnection());
+            command.Parameters.Add("id", SqlDbType.Int).Value = _id;
+            DataTable table = operation.RequestTable(command);
+            if (table.Rows.Count > 0)
+                return true;
+            else return false;
+        }
+
+        private bool deleteRelation(int _id)
+        {
+            SqlOperation operation = new SqlOperation();
+            SqlCommand command = new SqlCommand("Delete from [SubLesson] where [LessonID] = @id;", operation.DBcontext.GetConnection());
+            command.Parameters.Add("id", SqlDbType.Int).Value = _id;
+            if (operation.Request(command))
+                return true;
+            return false;
+        }
 
         private void DeleteClick(object sender, EventArgs e)
         {
+            if (checkDocOwned((int)(sender as Label).Tag))
+                deleteRelation((int)(sender as Label).Tag);
+
             SqlOperation operation = new SqlOperation();
             SqlCommand command = new SqlCommand("Delete from [Lesson] where [LessonID] = @id;", operation.DBcontext.GetConnection());
             command.Parameters.Add("id", SqlDbType.Int).Value = (int) (sender as Label).Tag;
             if (operation.Request(command))
                 MessageBox.Show("Запись удалена.");
             else new Error("Что-то пошло не так!").Show();
+
             checkLesson();
         }
 
@@ -182,16 +207,25 @@ namespace FitnessClub.Pages
 
         }
 
+        private string reverseString(string _str)
+        {
+            char[] sReverse = _str.ToCharArray();
+            Array.Reverse(sReverse);
+            return new string(sReverse);
+        }
+
         private void applayClick(object sender, EventArgs e)
         {
             if (validation())
             {
+                string _time = dateTimePicker1.Value.ToString().Substring(dateTimePicker1.Value.ToString().IndexOf(' ')); 
+                _time = reverseString(reverseString(_time).Substring(reverseString(_time).IndexOf(':') + 1));
                 SqlOperation operation = new SqlOperation();
                 SqlCommand command = new SqlCommand("Insert into [Lesson] (Name, DayWeek, TimeSpending, CounterpartyID, Status) " +
                     " Values (@name, @day, @time, @ca, @status)", operation.DBcontext.GetConnection());
                 command.Parameters.Add("name", SqlDbType.NVarChar).Value = tbName.Text;
                 command.Parameters.Add("day", SqlDbType.Int).Value = numberOfDay;
-                command.Parameters.Add("time", SqlDbType.VarChar).Value = dateTimePicker1.Value.ToString().Substring(dateTimePicker1.Value.ToString().IndexOf(' '));
+                command.Parameters.Add("time", SqlDbType.VarChar).Value = _time;
                 command.Parameters.Add("ca", SqlDbType.Int).Value = getCaID(Ctagent.Text);
                 command.Parameters.Add("status", SqlDbType.Int).Value = status.Checked == true ? 1 : 0;
                 if (operation.Request(command))
@@ -200,8 +234,6 @@ namespace FitnessClub.Pages
                 checkLesson();
             }
         }
-
-
 
         private int getCaID(string name)
         {
@@ -229,7 +261,7 @@ namespace FitnessClub.Pages
         }
 
         int numberOfDay = 0;
-        private void day1_Click(object sender, EventArgs e)
+        private void dayLblClick(object sender, EventArgs e)
         {
             foreach (Label l in days)
                 l.BorderStyle = BorderStyle.None;
@@ -259,11 +291,8 @@ namespace FitnessClub.Pages
                     numberOfDay = 7;
                     break;
             }
-
             unMarkInvalid();
         }
-
-
 
         private bool markInvalid(Label desc)
         {

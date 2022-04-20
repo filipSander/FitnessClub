@@ -30,6 +30,7 @@
         {
             this.lblName = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
+            this.Status = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblName
@@ -57,11 +58,25 @@
             this.lblTime.TabIndex = 1;
             this.lblTime.Text = "Time";
             // 
+            // Status
+            // 
+            this.Status.BackColor = System.Drawing.Color.SteelBlue;
+            this.Status.ForeColor = System.Drawing.Color.Snow;
+            this.Status.Location = new System.Drawing.Point(3, 81);
+            this.Status.Name = "Status";
+            this.Status.Size = new System.Drawing.Size(16, 17);
+            this.Status.TabIndex = 10;
+            this.Status.Text = "X";
+            this.Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Status.Visible = false;
+            this.Status.TabIndexChanged += new System.EventHandler(this.StatusTabIndexChanged);
+            // 
             // SchenduleItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.Controls.Add(this.Status);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblName);
             this.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -78,5 +93,6 @@
 
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblTime;
+        public System.Windows.Forms.Label Status;
     }
 }

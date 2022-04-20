@@ -2,7 +2,9 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
-
+using FitnessClub.Data;
+using System.Data.SqlClient;
+using FitnessClub.Forms;
 
 namespace FitnessClub.Assets
 {
@@ -41,12 +43,45 @@ namespace FitnessClub.Assets
                 p.Height = Height - 25;
         }
 
+        public void AddLesson(string LessonName, string LessonDate, int day, int _id, int _stat)
+        {
+            SchenduleItem temp = new SchenduleItem();
+            temp.LessDateEx = LessonDate;
+            temp.LessName = LessonName;
+            temp.Location = new Point(0, days[day - 1].Controls.Count == 0 ? heightColumn[day - 1] : heightColumn[day - 1] + 5);
+            
+            temp.Status.Visible = true;
+            temp.Status.TabIndex = _stat;
+            temp.Status.Tag = _id;
+            temp.Status.Click += StatusClick;
+
+            days[day - 1].Controls.Add(temp);
+            heightColumn[day - 1] += temp.Height + 5;
+
+            if (heightColumn[day - 1] > container.Height)
+                resizeView(heightColumn[day - 1]);
+        }
+
+        private void StatusClick(object sender, EventArgs e)
+        {
+            (sender as Label).TabIndex = (sender as Label).TabIndex == 0 ? 1 : 0;
+            SqlOperation operation = new SqlOperation();
+            SqlCommand command = new SqlCommand("Update [Lesson] set [Status] = @value where [LessonID] = " + (int) (sender as Label).Tag, operation.DBcontext.GetConnection());
+            command.Parameters.Add("value", System.Data.SqlDbType.Int).Value = (sender as Label).TabIndex;
+            if (!operation.Request(command))
+            {
+                new Error("Ошибка").Show();
+                (sender as Label).TabIndex = (sender as Label).TabIndex == 0 ? 1 : 0;
+            }
+        }
+
         public void AddLesson(string LessonName, string LessonDate, int day)
         {
             SchenduleItem temp = new SchenduleItem();
             temp.LessDateEx = LessonDate;
             temp.LessName = LessonName;
             temp.Location = new Point(0, days[day - 1].Controls.Count == 0 ? heightColumn[day - 1] :  heightColumn[day - 1] + 5);
+
 
             days[day - 1].Controls.Add(temp);
             heightColumn[day - 1] += temp.Height + 5;

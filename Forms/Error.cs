@@ -17,7 +17,7 @@ namespace FitnessClub.Forms
         private void act()
         {
             desc.Text = description;
-            Text = "Ошибка " + description;
+            Text = "Ошибка ";
             new FormStyle(this);
             roundButton1.Butt.Click += roundButtonClick;
         }

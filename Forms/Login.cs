@@ -24,7 +24,7 @@ namespace FitnessClub.Forms
             apply.Butt.Click += applyClick;
 
             WindowState = FormWindowState.Minimized;
-            new Main("User", 1).Show();
+            new Main("Admin", 0).Show();
         }
 
 

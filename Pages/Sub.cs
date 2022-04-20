@@ -295,21 +295,29 @@ namespace FitnessClub.Pages
             return "";
 
         }
+        private bool checkDocOwned(int _id)
+        {
+            SqlOperation operation = new SqlOperation();
+            SqlCommand command = new SqlCommand("Select * from [SubLesson] where [SubID] = @id;", operation.DBcontext.GetConnection());
+            command.Parameters.Add("id", SqlDbType.Int).Value = _id;
+            DataTable table = operation.RequestTable(command);
+            if (table.Rows.Count > 0)
+                return true;
+            return false;
+        }
 
         private void DeleteSub(object sender, EventArgs e)
         {
-            if(deleteRelation( (int)(sender as Label).Tag) )
-            {
-                SqlOperation operation = new SqlOperation();
-                SqlCommand command = new SqlCommand("Delete from [Subscription] where [SubID] = @id; ", operation.DBcontext.GetConnection());
-                command.Parameters.Add("id", SqlDbType.Int).Value = (int)(sender as Label).Tag;
-                if (operation.Request(command))
-                    MessageBox.Show("Запись удалена");
-                else new Error("Что-то пошло не так!").Show();
-                checkSub();
-
-            }
+            if (checkDocOwned((int)(sender as Label).Tag))
+                deleteRelation((int)(sender as Label).Tag);
+            SqlOperation operation = new SqlOperation();
+            SqlCommand command = new SqlCommand("Delete from [Subscription] where [SubID] = @id; ", operation.DBcontext.GetConnection());
+            command.Parameters.Add("id", SqlDbType.Int).Value = (int)(sender as Label).Tag;
+            if (operation.Request(command))
+                MessageBox.Show("Запись удалена");
             else new Error("Что-то пошло не так!").Show();
+            checkSub();
+
         }
 
         private bool deleteRelation(int _subID)
@@ -317,7 +325,8 @@ namespace FitnessClub.Pages
             SqlOperation operation = new SqlOperation();
             SqlCommand command = new SqlCommand("Delete from [SubLesson] where [SubID] = @id; ", operation.DBcontext.GetConnection());
             command.Parameters.Add("id", SqlDbType.Int).Value = _subID;
-            if(operation.Request(command)) return true;
+            if(operation.Request(command)) 
+                return true;
             return false;
         }
     }
