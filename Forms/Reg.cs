@@ -126,6 +126,12 @@ namespace FitnessClub.Forms
 
         private void tbFIO_KeyPress(object sender, KeyPressEventArgs e)
             => e.Handled = e.KeyChar == 13;
+
+        private void linkClick(object sender, EventArgs e)
+        {
+            new Login().Show();
+            Hide();
+        }
     }
 
     static class Extentions
