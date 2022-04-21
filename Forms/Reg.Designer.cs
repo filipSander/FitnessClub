@@ -170,6 +170,7 @@
             this.ForeColor = System.Drawing.Color.Snow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Reg";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Регистрация";
             this.ResumeLayout(false);
             this.PerformLayout();
