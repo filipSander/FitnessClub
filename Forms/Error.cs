@@ -13,7 +13,7 @@ namespace FitnessClub.Forms
             act();
 
         }
-        
+
         private void act()
         {
             desc.Text = description;

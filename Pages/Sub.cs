@@ -17,6 +17,7 @@ namespace FitnessClub.Pages
             InitializeComponent();
             act();
         }
+
         #region -- client part -- 
 
         public Sub(string userName)
@@ -24,10 +25,10 @@ namespace FitnessClub.Pages
             InitializeComponent();
             nameUser = userName;
             actUser();
-            
+
         }
 
-        string nameUser= string.Empty;
+        string nameUser = string.Empty;
         int couterpatyID;
         List<int> subID;
         private void actUser()
@@ -81,13 +82,13 @@ namespace FitnessClub.Pages
                 command.Parameters.Add("dateEx", SqlDbType.NVarChar).Value = tbDateEx.Text;
                 command.Parameters.Add("desc", SqlDbType.NVarChar).Value = rcDesc.Text;
                 command.Parameters.Add("name", SqlDbType.NVarChar).Value = tbName.Text;
-                
+
                 if (operation.Request(command))
                 {
                     int lastID = getLastSubID();
                     foreach (CheckBox check in lesson)
                         if (check.Checked)
-                            if(!createRelation(lastID, (int)check.Tag))
+                            if (!createRelation(lastID, (int)check.Tag))
                             {
                                 new Error("Что-то пошло не так!").Show();
                                 return;
@@ -110,7 +111,7 @@ namespace FitnessClub.Pages
             return _id;
         }
 
-        private bool createRelation(int _SubID , int _LessID)
+        private bool createRelation(int _SubID, int _LessID)
         {
             SqlOperation operation = new SqlOperation();
             SqlCommand command = new SqlCommand("Insert into [SubLesson] (LessonID, SubID) " +
@@ -198,7 +199,7 @@ namespace FitnessClub.Pages
 
                     temp.Location = new Point(0, offset);
                     temp.Delete.TabIndex = 2;
-                    if(nameUser == string.Empty)
+                    if (nameUser == string.Empty)
                     {
                         temp.Delete.Tag = table.Rows[i].Field<int>("SubID");
                         temp.Delete.Click += DeleteSub;
@@ -207,7 +208,7 @@ namespace FitnessClub.Pages
                     {
                         temp.Delete.TabIndex = 0;
                         temp.Delete.Tag = table.Rows[i].Field<int>("SubID");
-                        if(subID.Contains(table.Rows[i].Field<int>("SubID")))
+                        if (subID.Contains(table.Rows[i].Field<int>("SubID")))
                             temp.Delete.TabIndex = 1;
 
                         temp.Delete.Click += subOperationClick;
@@ -248,12 +249,12 @@ namespace FitnessClub.Pages
             }
             else
             {
-                if(checkSubOwned())
+                if (checkSubOwned())
                 {
                     MessageBox.Show("У вас уже имеется приобретенный абонимент");
                     return;
                 }
-                SqlCommand command = new SqlCommand("insert  into [CaSub] ([CounterpartyID], [SubID])" + 
+                SqlCommand command = new SqlCommand("insert  into [CaSub] ([CounterpartyID], [SubID])" +
                     "Values (@caID, @subID);", operation.DBcontext.GetConnection());
                 command.Parameters.Add("subID", SqlDbType.Int).Value = (int)(sender as Label).Tag;
                 command.Parameters.Add("caID", SqlDbType.Int).Value = couterpatyID;
@@ -265,7 +266,7 @@ namespace FitnessClub.Pages
                     return;
                 }
                 (sender as Label).TabIndex = 1;
-            } 
+            }
         }
 
         private string checkCaLesson(int _id)
@@ -325,7 +326,7 @@ namespace FitnessClub.Pages
             SqlOperation operation = new SqlOperation();
             SqlCommand command = new SqlCommand("Delete from [SubLesson] where [SubID] = @id; ", operation.DBcontext.GetConnection());
             command.Parameters.Add("id", SqlDbType.Int).Value = _subID;
-            if(operation.Request(command)) 
+            if (operation.Request(command))
                 return true;
             return false;
         }

@@ -43,7 +43,7 @@ namespace FitnessClub.Data
                 DBcontext.CloseConnection();
             }
             else new Error("Ошибка соединения с бд.").Show();
-                
+
             return false;
         }
 

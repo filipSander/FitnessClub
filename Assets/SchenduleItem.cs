@@ -33,10 +33,10 @@ namespace FitnessClub.Assets
         private void StatusTabIndexChanged(object sender, EventArgs e)
         {
             if (Status.TabIndex == 0)
-            {     
+            {
                 Status.Text = "+";
                 BackColor = Color.Maroon;
-                Status.BackColor  = Color.SteelBlue;
+                Status.BackColor = Color.SteelBlue;
             }
             else
             {
@@ -48,8 +48,8 @@ namespace FitnessClub.Assets
 
         private void lblNameTextChanged(object sender, EventArgs e)
         {
-            if(lblName.Text.Length > 18)
-                lblName.Text = lblName.Text.Substring(0,15) + ".."; 
+            if (lblName.Text.Length > 18)
+                lblName.Text = lblName.Text.Substring(0, 15) + "..";
         }
     }
 }

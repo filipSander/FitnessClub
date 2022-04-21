@@ -55,11 +55,11 @@ namespace FitnessClub.Forms
                     pageInit(typeUser == 1 ? new Sub(userName) : new Sub(), container);
                     break;
                 case 2:
-                    pageInit(typeUser == 1 ? new Lesson(userName) :new Lesson(), container);
+                    pageInit(typeUser == 1 ? new Lesson(userName) : new Lesson(), container);
                     break;
                 case 3:
                     pageInit(typeUser == 1 ? new Index(userName) : new Index(), container);
-                break;                
+                    break;
             }
         }
 

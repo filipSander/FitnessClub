@@ -1,6 +1,6 @@
-﻿using System;
-using FitnessClub.Assets;
+﻿using FitnessClub.Assets;
 using FitnessClub.Data;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -22,9 +22,6 @@ namespace FitnessClub.Forms
             loginCtl.Input.TextChanged += InputTextChanged;
             passCtl.Input.TextChanged += InputTextChanged;
             apply.Butt.Click += applyClick;
-
-            WindowState = FormWindowState.Minimized;
-            new Main("Admin", 0).Show();
         }
 
 
@@ -44,22 +41,22 @@ namespace FitnessClub.Forms
 
         private void applyClick(object sender, EventArgs e)
         {
-            if(validation(loginCtl.Input, loginLable) && validation(passCtl.Input, passLable))
+            if (validation(loginCtl.Input, loginLable) && validation(passCtl.Input, passLable))
             {
                 SqlOperation operation = new SqlOperation();
                 SqlCommand command = new SqlCommand("Select * from [User] where [Login] = @login", operation.DBcontext.GetConnection());
                 command.Parameters.Add("login", SqlDbType.NVarChar).Value = loginCtl.Input.Text;
                 DataTable table = operation.RequestTable(command);
 
-                if(table.Rows.Count > 0)
+                if (table.Rows.Count > 0)
                 {
                     if (table.Rows[0].Field<string>("Password") == passCtl.Input.Text)
-                    {   
-                        
+                    {
+
                         new Main(table.Rows[0].Field<string>("Login"), table.Rows[0].Field<int>("Type")).Show();
                         Hide();
                     }
-                        
+
                 }
                 markInvalid(loginLable);
             }
@@ -72,5 +69,11 @@ namespace FitnessClub.Forms
         }
         private void showPassIconClick(object sender, EventArgs e)
             => passCtl.PasswordChar = !passCtl.PasswordChar;
+
+        private void registrationClick(object sender, EventArgs e)
+        {
+            new Reg().Show();
+            Hide();
+        }
     }
 }

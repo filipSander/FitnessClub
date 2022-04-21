@@ -13,7 +13,7 @@ namespace FitnessClub.Pages
             act();
         }
         private string nameUser = "Не найденно";
-        public Index(string _nameUser )
+        public Index(string _nameUser)
         {
             InitializeComponent();
             nameUser = _nameUser;
@@ -32,10 +32,10 @@ namespace FitnessClub.Pages
 
         private int getCaID(string _login)
         {
-            
+
             SqlOperation operation = new SqlOperation();
             SqlCommand command = new SqlCommand("Select [CounterpartyID] from [User] where [Login] = @lg", operation.DBcontext.GetConnection());
-            command.Parameters.Add("lg",SqlDbType.NVarChar).Value = _login;
+            command.Parameters.Add("lg", SqlDbType.NVarChar).Value = _login;
             DataTable table = operation.RequestTable(command);
             if (table.Rows.Count > 0)
                 return table.Rows[0].Field<int>("CounterpartyID");
@@ -49,22 +49,22 @@ namespace FitnessClub.Pages
             DataTable table = operation.RequestTable(command);
             if (table.Rows.Count > 0)
             {
-                    fillSubName(table.Rows[0].Field<int>("SubID"));
-                    fillInput(table.Rows[0].Field<int>("SubID"));
+                fillSubName(table.Rows[0].Field<int>("SubID"));
+                fillInput(table.Rows[0].Field<int>("SubID"));
             }
         }
 
-        private void fillInput(int _SubID) 
+        private void fillInput(int _SubID)
         {
             SqlOperation operation = new SqlOperation();
             SqlCommand command = new SqlCommand("Select [LessonID] from [SubLesson] where [subID] = " + _SubID, operation.DBcontext.GetConnection());
             DataTable table = operation.RequestTable(command);
-            if(table.Rows.Count > 0)
+            if (table.Rows.Count > 0)
             {
                 input.Text = "Переподователь \t\t\t Занятие\n\n";
                 for (int i = 0; i < table.Rows.Count; i++)
                 {
-                    input.Text += checkLessonMaster(table.Rows[0].Field<int>("LessonID")) + "\t\t\t " +  checkLessonName(table.Rows[0].Field<int>("LessonID")) + "\n";
+                    input.Text += checkLessonMaster(table.Rows[0].Field<int>("LessonID")) + "\t\t\t " + checkLessonName(table.Rows[0].Field<int>("LessonID")) + "\n";
                 }
             }
         }
@@ -95,7 +95,7 @@ namespace FitnessClub.Pages
             SqlCommand command = new SqlCommand("Select [Name] from [Lesson] where [LessonID] = " + _lessID, operation.DBcontext.GetConnection());
             DataTable table = operation.RequestTable(command);
             if (table.Rows.Count > 0)
-                return  table.Rows[0].Field<string>("Name");
+                return table.Rows[0].Field<string>("Name");
             return string.Empty;
         }
 
@@ -136,7 +136,7 @@ namespace FitnessClub.Pages
             userCount = workerCount = 0;
             if (table.Rows.Count > 0)
             {
-                for(int i = 0; i < table.Rows.Count; i++)
+                for (int i = 0; i < table.Rows.Count; i++)
                     if (table.Rows[i].Field<int>("Type") == 0) workerCount++;
                     else userCount++;
 

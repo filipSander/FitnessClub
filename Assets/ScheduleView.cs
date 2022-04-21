@@ -1,10 +1,10 @@
-﻿using System;
+﻿using FitnessClub.Data;
+using FitnessClub.Forms;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using FitnessClub.Data;
-using System.Data.SqlClient;
-using FitnessClub.Forms;
 
 namespace FitnessClub.Assets
 {
@@ -15,7 +15,7 @@ namespace FitnessClub.Assets
             InitializeComponent();
             act();
         }
-        
+
         List<Panel> days;
         List<int> heightColumn;
 
@@ -25,14 +25,14 @@ namespace FitnessClub.Assets
             heightColumn = new List<int>() { 0, 0, 0, 0, 0, 0, 0 };
             int day = 0;
             switch (DateTime.Today.DayOfWeek)
-            {                
-                case DayOfWeek.Monday:    day = 0;break;
-                case DayOfWeek.Tuesday:   day = 1;break;
-                case DayOfWeek.Wednesday: day = 2;break;
-                case DayOfWeek.Thursday:  day = 3;break; 
-                case DayOfWeek.Friday:    day = 4;break;
-                case DayOfWeek.Saturday:  day = 5;break;
-                case DayOfWeek.Sunday:    day = 6;break;
+            {
+                case DayOfWeek.Monday: day = 0; break;
+                case DayOfWeek.Tuesday: day = 1; break;
+                case DayOfWeek.Wednesday: day = 2; break;
+                case DayOfWeek.Thursday: day = 3; break;
+                case DayOfWeek.Friday: day = 4; break;
+                case DayOfWeek.Saturday: day = 5; break;
+                case DayOfWeek.Sunday: day = 6; break;
             }
 
             days[day].BackColor = Color.FromArgb(46, 50, 58);
@@ -49,7 +49,7 @@ namespace FitnessClub.Assets
             temp.LessDateEx = LessonDate;
             temp.LessName = LessonName;
             temp.Location = new Point(0, days[day - 1].Controls.Count == 0 ? heightColumn[day - 1] : heightColumn[day - 1] + 5);
-            
+
             temp.Status.Visible = true;
             temp.Status.TabIndex = _stat;
             temp.Status.Tag = _id;
@@ -66,7 +66,7 @@ namespace FitnessClub.Assets
         {
             (sender as Label).TabIndex = (sender as Label).TabIndex == 0 ? 1 : 0;
             SqlOperation operation = new SqlOperation();
-            SqlCommand command = new SqlCommand("Update [Lesson] set [Status] = @value where [LessonID] = " + (int) (sender as Label).Tag, operation.DBcontext.GetConnection());
+            SqlCommand command = new SqlCommand("Update [Lesson] set [Status] = @value where [LessonID] = " + (int)(sender as Label).Tag, operation.DBcontext.GetConnection());
             command.Parameters.Add("value", System.Data.SqlDbType.Int).Value = (sender as Label).TabIndex;
             if (!operation.Request(command))
             {
@@ -80,7 +80,7 @@ namespace FitnessClub.Assets
             SchenduleItem temp = new SchenduleItem();
             temp.LessDateEx = LessonDate;
             temp.LessName = LessonName;
-            temp.Location = new Point(0, days[day - 1].Controls.Count == 0 ? heightColumn[day - 1] :  heightColumn[day - 1] + 5);
+            temp.Location = new Point(0, days[day - 1].Controls.Count == 0 ? heightColumn[day - 1] : heightColumn[day - 1] + 5);
 
 
             days[day - 1].Controls.Add(temp);

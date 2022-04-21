@@ -20,13 +20,13 @@ namespace FitnessClub.Pages
 
         #region -- Client part --
         string nameUser;
-        public Lesson( string userName)
+        public Lesson(string userName)
         {
             InitializeComponent();
             nameUser = userName;
             actUser();
         }
-        
+
         List<int> subID;
         List<int> lessID;
         int couterpatyID;
@@ -51,7 +51,7 @@ namespace FitnessClub.Pages
             {
                 SqlCommand command = new SqlCommand("select * from [Lesson] where [LessonID] = " + lessID[i], operation.DBcontext.GetConnection());
                 DataTable table = operation.RequestTable(command);
-                if(table.Rows.Count > 0)
+                if (table.Rows.Count > 0)
                 {
                     LessonItem temp = new LessonItem();
                     temp.LesStatus = table.Rows[0].Field<int>("Status") == 0 ? "Не активна" : "Активна";
@@ -82,7 +82,7 @@ namespace FitnessClub.Pages
         private void getLessID()
         {
             SqlOperation operation = new SqlOperation();
-            for(int i = 0; i < subID.Count; i++)
+            for (int i = 0; i < subID.Count; i++)
             {
                 SqlCommand command = new SqlCommand("Select [LessonID] from [SubLesson] where [SubID] = " + subID[i], operation.DBcontext.GetConnection());
                 DataTable table = operation.RequestTable(command);
@@ -97,7 +97,7 @@ namespace FitnessClub.Pages
             SqlCommand command = new SqlCommand("Select [SubID] from [CaSub] where [CounterpartyID] = " + couterpatyID, operation.DBcontext.GetConnection());
             DataTable table = operation.RequestTable(command);
             if (table.Rows.Count > 0)
-                for(int i = 0; i < table.Rows.Count; i++)
+                for (int i = 0; i < table.Rows.Count; i++)
                     subID.Add(table.Rows[i].Field<int>("SubID"));
         }
         private int getcouterpatyID(string _login)
@@ -114,7 +114,7 @@ namespace FitnessClub.Pages
 
         private List<Label> days;
         private void act()
-        { 
+        {
             days = new List<Label>() { day1, day2, day3, day4, day5, day6, day7 };
             checkCtagent();
             checkLesson();
@@ -125,10 +125,10 @@ namespace FitnessClub.Pages
             SqlOperation operation = new SqlOperation();
             SqlCommand command = new SqlCommand("select * from [Lesson] order by [LessonID] desc ", operation.DBcontext.GetConnection());
             DataTable table = operation.RequestTable(command);
-            if(table.Rows.Count > 0)
+            if (table.Rows.Count > 0)
             {
                 int offset = 0;
-                for(int i = 0; i < table.Rows.Count; i++)
+                for (int i = 0; i < table.Rows.Count; i++)
                 {
                     LessonItem temp = new LessonItem();
                     temp.LesStatus = table.Rows[i].Field<int>("Status") == 0 ? "Не активна" : "Активна";
@@ -150,7 +150,7 @@ namespace FitnessClub.Pages
                     temp.Location = new Point(0, offset);
                     temp.Butt.Tag = table.Rows[i].Field<int>("LessonID");
                     temp.Butt.Click += DeleteClick;
-                    
+
                     offset += temp.Width;
                     container.Controls.Add(temp);
                 }
@@ -185,7 +185,7 @@ namespace FitnessClub.Pages
 
             SqlOperation operation = new SqlOperation();
             SqlCommand command = new SqlCommand("Delete from [Lesson] where [LessonID] = @id;", operation.DBcontext.GetConnection());
-            command.Parameters.Add("id", SqlDbType.Int).Value = (int) (sender as Label).Tag;
+            command.Parameters.Add("id", SqlDbType.Int).Value = (int)(sender as Label).Tag;
             if (operation.Request(command))
                 MessageBox.Show("Запись удалена.");
             else new Error("Что-то пошло не так!").Show();
@@ -218,7 +218,7 @@ namespace FitnessClub.Pages
         {
             if (validation())
             {
-                string _time = dateTimePicker1.Value.ToString().Substring(dateTimePicker1.Value.ToString().IndexOf(' ')); 
+                string _time = dateTimePicker1.Value.ToString().Substring(dateTimePicker1.Value.ToString().IndexOf(' '));
                 _time = reverseString(reverseString(_time).Substring(reverseString(_time).IndexOf(':') + 1));
                 SqlOperation operation = new SqlOperation();
                 SqlCommand command = new SqlCommand("Insert into [Lesson] (Name, DayWeek, TimeSpending, CounterpartyID, Status) " +
@@ -253,9 +253,9 @@ namespace FitnessClub.Pages
             SqlCommand command = new SqlCommand("select [FIO] from [Counterparty] where [Type] = 0;", operation.DBcontext.GetConnection());
             DataTable table = operation.RequestTable(command);
 
-            if(table.Rows.Count > 0)
+            if (table.Rows.Count > 0)
             {
-                for(int i = 0; i < table.Rows.Count; i++)
+                for (int i = 0; i < table.Rows.Count; i++)
                     Ctagent.Items.Add(table.Rows[i].Field<string>("FIO"));
             }
         }
@@ -267,10 +267,10 @@ namespace FitnessClub.Pages
                 l.BorderStyle = BorderStyle.None;
             (sender as Label).BorderStyle = BorderStyle.FixedSingle;
 
-            switch((sender as Label).Name.ToString())
+            switch ((sender as Label).Name.ToString())
             {
                 case "day1":
-                    numberOfDay= 1;
+                    numberOfDay = 1;
                     break;
                 case "day2":
                     numberOfDay = 2;
@@ -308,7 +308,7 @@ namespace FitnessClub.Pages
             if (Ctagent.Text == String.Empty)
                 return markInvalid(lblCaDesc);
 
-            if(numberOfDay == 0)
+            if (numberOfDay == 0)
                 return markInvalid(lblDayDesc);
 
             return true;

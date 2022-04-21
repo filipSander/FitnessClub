@@ -1,23 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FitnessClub.Assets
 {
 
     public partial class RoundTextBox : UserControl
-    {    
+    {
         #region API
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRect
-        (int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipse, int nHeightEllipse );
+        (int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipse, int nHeightEllipse);
 
         [DllImport("gdi32.dll", EntryPoint = "DeleteObject")]
         private static extern bool DeleteObject(IntPtr hObject);
@@ -57,7 +52,7 @@ namespace FitnessClub.Assets
             => Input.Width = Width - 10;
 
         private void inputTextChanged(object sender, EventArgs e)
-            =>_value = Input.Text;
+            => _value = Input.Text;
 
         private void RoundTextBox_Enter(object sender, EventArgs e)
             => Input.Select();

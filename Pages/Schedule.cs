@@ -41,12 +41,12 @@ namespace FitnessClub.Pages
         {
             scheduleView1.Clear();
             SqlOperation operation = new SqlOperation();
-            if(lessID.Count > 0)
-                for(int i = 0; i < lessID.Count; i++)
+            if (lessID.Count > 0)
+                for (int i = 0; i < lessID.Count; i++)
                 {
                     SqlCommand command = new SqlCommand("select * from [Lesson] where [LessonID] = " + lessID[i], operation.DBcontext.GetConnection());
                     DataTable table = operation.RequestTable(command);
-                    if(table.Rows.Count > 0)
+                    if (table.Rows.Count > 0)
                         scheduleView1.AddLesson(table.Rows[0].Field<string>("Name"), table.Rows[0].Field<string>("TimeSpending"), table.Rows[0].Field<int>("DayWeek"));
                 }
         }
@@ -99,10 +99,10 @@ namespace FitnessClub.Pages
             {
                 for (int i = 0; i < table.Rows.Count; i++)
                     scheduleView1.AddLesson(
-                        table.Rows[i].Field<string>("Name"), 
-                        table.Rows[i].Field<string>("TimeSpending"), 
+                        table.Rows[i].Field<string>("Name"),
+                        table.Rows[i].Field<string>("TimeSpending"),
                         table.Rows[i].Field<int>("DayWeek"),
-                        table.Rows[i].Field<int>("LessonID"), 
+                        table.Rows[i].Field<int>("LessonID"),
                         table.Rows[i].Field<int>("Status")
                     );
             }

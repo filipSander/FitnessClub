@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FitnessClub.Assets
@@ -56,8 +52,8 @@ namespace FitnessClub.Assets
             panel.BackgroundImageLayout = ImageLayout.Zoom;
             panel.BackColor = Color.Transparent;
             panel.MouseClick += menuItemClick;
-            
-            
+
+
             Label label = new Label();
             label.Text = itemTitle;
             label.Anchor = AnchorStyles.None;
@@ -73,12 +69,12 @@ namespace FitnessClub.Assets
             itemsCount++;
         }
 
-        
+
         int _sender = 0;
         private void menuItemClick(object sender, MouseEventArgs e)
         {
-            
-            switch(sender.GetType().ToString())
+
+            switch (sender.GetType().ToString())
             {
                 case "System.Windows.Forms.Panel":
                     _sender = Convert.ToInt32((sender as Panel).Tag);
